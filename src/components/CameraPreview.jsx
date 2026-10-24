@@ -1,7 +1,6 @@
 
 import { Camera } from "lucide-react";
-
-function CameraPreview() {
+const  CameraPreview = () => {
   return (
     <div className="w-64 overflow-hidden rounded-lg border border-slate-700 bg-black">
       <div className="flex items-center gap-2 bg-slate-900 px-3 py-2">

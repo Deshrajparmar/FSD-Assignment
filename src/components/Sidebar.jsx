@@ -8,7 +8,7 @@ import {
   UserRound,
 } from "lucide-react";
 
-function Sidebar() {
+const  Sidebar = ()=> {
   return (
     <aside className="flex h-screen w-20 flex-col items-center bg-slate-950 py-6 text-slate-400">
       <h1 className="mb-10 text-xl font-bold text-white">ERIC</h1>
