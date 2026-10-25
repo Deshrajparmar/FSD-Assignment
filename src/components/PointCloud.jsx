@@ -53,9 +53,10 @@ const PointCloud = () => {
     const loader = new PCDLoader();
 
     loader.load(
-      "/models/office1_keypoints.pcd",
+      "/models/office2_keypoints.pcd",
       (pointCloud) => {
         pointCloud.material.size = 0.06;
+        
         pointCloud.material.color.set("#38bdf8");
 
         pointCloud.rotation.x = -Math.PI / 2;
@@ -91,6 +92,7 @@ const PointCloud = () => {
 
             controls.target.set(0, 0, 0);
             controls.update();
+            
           }
         }
 

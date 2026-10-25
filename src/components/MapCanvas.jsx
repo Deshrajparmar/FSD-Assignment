@@ -29,7 +29,7 @@ const MapCanvas = () => {
       </div>
 
       <div className="relative min-h-[500px] min-w-0 flex-1 overflow-hidden bg-black">
-        {/* Main view */}
+      
         <div className="absolute inset-0">
           {isMapMain ? <PointCloud /> : <CameraPreview />}
         </div>

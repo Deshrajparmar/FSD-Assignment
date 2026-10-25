@@ -50,7 +50,6 @@ const RobotControls = () => {
       </div>
 
       <div className="absolute bottom-4 right-4 z-40 flex flex-col items-center gap-3 rounded-xl border border-slate-700 bg-slate-900/95 p-3 shadow-xl">
-        {/* Emergency stop */}
         <button
           type="button"
           onClick={stopRobot}
