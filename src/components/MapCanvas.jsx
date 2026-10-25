@@ -1,37 +1,59 @@
 
-import { Map } from "lucide-react";
+import { useState } from "react";
 import CameraPreview from "./CameraPreview";
 import RobotControls from "./RobotControls";
 import PointCloud from "./PointCloud";
+import TopStatusBar from "./TopStatusBar";
 
 const MapCanvas = () => {
+  const [mainView, setMainView] = useState("map");
+  const isMapMain = mainView === "map";
+
   return (
-    <section className="flex min-h-[500px] min-w-0 flex-1 flex-col overflow-hidden rounded-xl border border-slate-700 bg-slate-900">
-      {/* Map header */}
-      <div className="flex items-center justify-between border-b border-slate-700 px-5 py-4">
+    <section className="flex h-full min-h-0 min-w-0 flex-1 flex-col overflow-hidden bg-slate-950">
+      {/* Top status bar */}
+      <div className="relative z-50 shrink-0">
+        <TopStatusBar />
+      </div>
+
+      <div className="flex shrink-0 items-center justify-between px-5 py-3">
         <div>
-          <h2 className="font-semibold text-white">3D Map</h2>
-          <p className="mt-1 text-sm text-slate-400">
-            Robot environment visualization
+          <h2 className="text-lg font-semibold text-white">
+            {isMapMain ? "3D Map" : "Live Camera"}
+          </h2>
+          <p className="mt-1 text-xs text-slate-400">
+            Click the preview to switch views
           </p>
         </div>
 
-        <Map size={20} className="text-slate-400" />
+        
       </div>
 
-      {/* Map workspace */}
-      <div className="relative min-h-[400px] flex-1 bg-slate-950">
-        {/* 3D point cloud background */}
+      <div className="relative min-h-[500px] min-w-0 flex-1 overflow-hidden bg-black">
+        {/* Main view */}
         <div className="absolute inset-0">
-          <PointCloud />
+          {isMapMain ? <PointCloud /> : <CameraPreview />}
         </div>
 
-        {/* Camera preview */}
-        <div className="absolute bottom-4 left-4 z-10 w-56 max-w-[40%]">
-          <CameraPreview />
-        </div>
+        <button
+          type="button"
+          onClick={() =>
+            setMainView(isMapMain ? "camera" : "map")
+          }
+          aria-label={
+            isMapMain ? "Enlarge camera" : "Enlarge 3D map"
+          }
+          className="absolute bottom-5 left-5 z-30 h-32 w-48 overflow-hidden rounded-lg border border-slate-600 bg-slate-900 shadow-2xl transition hover:border-sky-400 sm:h-36 sm:w-56"
+        >
+          <div className="pointer-events-none absolute inset-0">
+            {isMapMain ? <CameraPreview /> : <PointCloud />}
+          </div>
 
-        {/* Robot controls */}
+          <span className="absolute left-2 top-2 rounded bg-slate-950/90 px-2 py-1 text-xs font-medium text-white">
+            {isMapMain ? "LIVE CAMERA" : "3D MAP"}
+          </span>
+        </button>
+
         <RobotControls />
       </div>
     </section>

@@ -12,11 +12,9 @@ const PointCloud = () => {
 
     if (!container) return;
 
-    // Create the 3D scene
     const scene = new THREE.Scene();
     scene.background = new THREE.Color("#020617");
 
-    // Create the camera
     const camera = new THREE.PerspectiveCamera(
       60,
       container.clientWidth / container.clientHeight,
@@ -28,7 +26,6 @@ const PointCloud = () => {
     camera.up.set(0, 1, 0);
     camera.lookAt(0, 0, 0);
 
-    // Create the renderer
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
     });
@@ -37,7 +34,6 @@ const PointCloud = () => {
     renderer.setSize(container.clientWidth, container.clientHeight);
     container.appendChild(renderer.domElement);
 
-    // Add mouse controls
     const controls = new OrbitControls(camera, renderer.domElement);
 
     controls.enableDamping = true;
@@ -45,7 +41,6 @@ const PointCloud = () => {
     controls.target.set(0, 0, 0);
     controls.update();
 
-    // Add ground grid
     const grid = new THREE.GridHelper(
       20,
       20,
@@ -55,7 +50,6 @@ const PointCloud = () => {
 
     scene.add(grid);
 
-    // Load the PCD file
     const loader = new PCDLoader();
 
     loader.load(
@@ -64,10 +58,8 @@ const PointCloud = () => {
         pointCloud.material.size = 0.06;
         pointCloud.material.color.set("#38bdf8");
 
-        // Rotate the point cloud to adjust its orientation
         pointCloud.rotation.x = -Math.PI / 2;
 
-        // Calculate the point cloud bounds
         pointCloud.geometry.computeBoundingBox();
 
         const boundingBox = pointCloud.geometry.boundingBox;
@@ -76,7 +68,6 @@ const PointCloud = () => {
           const center = new THREE.Vector3();
           boundingBox.getCenter(center);
 
-          // Center the point cloud
           pointCloud.position.sub(center);
 
           const size = new THREE.Vector3();
@@ -85,7 +76,6 @@ const PointCloud = () => {
           const maxSize = Math.max(size.x, size.y, size.z);
 
           if (maxSize > 0) {
-            // Position camera based on map size
             camera.position.set(
               maxSize * 0.8,
               maxSize * 0.7,
@@ -118,7 +108,6 @@ const PointCloud = () => {
       }
     );
 
-    // Render the scene
     let animationId;
 
     const animate = () => {
@@ -130,7 +119,6 @@ const PointCloud = () => {
 
     animate();
 
-    // Handle resizing
     const handleResize = () => {
       const width = container.clientWidth;
       const height = container.clientHeight;
@@ -145,7 +133,6 @@ const PointCloud = () => {
 
     window.addEventListener("resize", handleResize);
 
-    // Clean up resources
     return () => {
       window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(animationId);

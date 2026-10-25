@@ -11,14 +11,13 @@ const  CameraPreview = () => {
       </div>
 
       <video
-        src="/camera.mp4"
-        controls
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="block aspect-video w-full object-cover"
-      />
+  src="/camera.mp4"
+  autoPlay
+  muted
+  loop
+  playsInline
+  className="absolute inset-0 h-full w-full object-cover"
+/>
     </div>
   );
 }
