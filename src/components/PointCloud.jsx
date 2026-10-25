@@ -53,7 +53,7 @@ const PointCloud = () => {
     const loader = new PCDLoader();
 
     loader.load(
-      "/models/room.pcd",
+      "/models/office1_keypoints.pcd",
       (pointCloud) => {
         pointCloud.material.size = 0.06;
         pointCloud.material.color.set("#38bdf8");

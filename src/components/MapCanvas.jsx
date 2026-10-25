@@ -11,7 +11,6 @@ const MapCanvas = () => {
 
   return (
     <section className="flex h-full min-h-0 min-w-0 flex-1 flex-col overflow-hidden bg-slate-950">
-      {/* Top status bar */}
       <div className="relative z-50 shrink-0">
         <TopStatusBar />
       </div>
